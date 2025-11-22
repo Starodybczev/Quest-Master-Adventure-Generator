@@ -101,3 +101,25 @@ class Database:
         quest = self.get_quest(quest_id)
         self.save_version(quest)
         return quest
+    
+
+
+
+    def update_quest_fields(self, quest_id, fields):
+        """
+        fields = {"title": "...", "reward": 500}
+        """
+
+        if not fields:
+            return
+
+        keys = ", ".join([f"{k}=?" for k in fields])
+        values = list(fields.values())
+        values.append(quest_id)
+
+        cur = self.conn.cursor()
+        cur.execute(f"UPDATE quests SET {keys} WHERE id=?", values)
+        self.conn.commit()
+
+        quest = self.get_quest(quest_id)
+        self.save_version(quest)
