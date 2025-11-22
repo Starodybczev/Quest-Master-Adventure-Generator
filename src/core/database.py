@@ -16,3 +16,11 @@ class Quest:
     description: str
     deadline: str
     created_at: Optional[str] = None
+
+
+
+class Database:
+    def __init__(self, path: Path = DB_PATH):
+        self.conn = sqlite3.connect(path)
+        self.conn.row_factory = sqlite3.Row
+        self._init_schema()    
