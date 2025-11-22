@@ -123,3 +123,27 @@ class Database:
 
         quest = self.get_quest(quest_id)
         self.save_version(quest)
+
+
+
+
+
+
+
+    def save_version(self, q):
+        cur = self.conn.cursor()
+
+        cur.execute("""
+        INSERT INTO quest_versions(quest_id, title, difficulty, reward, description, deadline)
+        VALUES (?, ?, ?, ?, ?, ?)
+        """, (
+            q["id"],
+            q["title"],
+            q["difficulty"],
+            q["reward"],
+            q["description"],
+            q["deadline"]
+        ))
+
+        self.conn.commit()
+
