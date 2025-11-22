@@ -26,8 +26,10 @@ class Database:
         self._init_schema() 
 
 
-    def _init_schema(self):
+    def create_tables(self):
         cur = self.conn.cursor()
+
+        # Таблица квестов
         cur.execute("""
         CREATE TABLE IF NOT EXISTS quests (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -39,6 +41,8 @@ class Database:
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
         """)
+
+        # Таблица версий
         cur.execute("""
         CREATE TABLE IF NOT EXISTS quest_versions (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -52,6 +56,8 @@ class Database:
             FOREIGN KEY (quest_id) REFERENCES quests(id)
         );
         """)
+
+        # Таблица объектов карты
         cur.execute("""
         CREATE TABLE IF NOT EXISTS locations (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -62,4 +68,7 @@ class Database:
             FOREIGN KEY (quest_id) REFERENCES quests(id)
         );
         """)
+
         self.conn.commit()
+
+
