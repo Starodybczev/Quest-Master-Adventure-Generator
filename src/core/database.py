@@ -147,3 +147,58 @@ class Database:
 
         self.conn.commit()
 
+
+
+
+
+    def get_quest(self, quest_id):
+        cur = self.conn.cursor()
+        row = cur.execute("SELECT * FROM quests WHERE id=?", (quest_id,)).fetchone()
+
+        if row:
+            return dict(row)
+        return None
+    
+
+
+
+    def list_quests(self):
+        cur = self.conn.cursor()
+        rows = cur.execute("SELECT * FROM quests ORDER BY created_at DESC").fetchall()
+        return [dict(r) for r in rows]
+    
+
+
+
+
+    def add_location(self, quest_id, kind, payload):
+        cur = self.conn.cursor()
+
+        cur.execute("""
+        INSERT INTO locations(quest_id, kind, payload)
+        VALUES (?, ?, ?)
+        """, (quest_id, kind, json.dumps(payload)))
+
+        self.conn.commit()
+
+
+
+    def list_locations(self, quest_id):
+        cur = self.conn.cursor()
+        rows = cur.execute("SELECT * FROM locations WHERE quest_id=?", (quest_id,)).fetchall()
+
+        result = []
+        for r in rows:
+            item = dict(r)
+            item["payload"] = json.loads(item["payload"])
+            result.append(item)
+
+        return result
+    
+
+
+
+    def clear_locations(self, quest_id):
+        cur = self.conn.cursor()
+        cur.execute("DELETE FROM locations WHERE quest_id=?", (quest_id,))
+        self.conn.commit()
