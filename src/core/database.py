@@ -23,4 +23,43 @@ class Database:
     def __init__(self, path: Path = DB_PATH):
         self.conn = sqlite3.connect(path)
         self.conn.row_factory = sqlite3.Row
-        self._init_schema()    
+        self._init_schema() 
+
+
+    def _init_schema(self):
+        cur = self.conn.cursor()
+        cur.execute("""
+        CREATE TABLE IF NOT EXISTS quests (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            title TEXT UNIQUE NOT NULL,
+            difficulty TEXT CHECK(difficulty IN ('Легкий','Средний','Сложный','Эпический')),
+            reward INTEGER,
+            description TEXT,
+            deadline TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+        """)
+        cur.execute("""
+        CREATE TABLE IF NOT EXISTS quest_versions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            quest_id INTEGER,
+            title TEXT,
+            difficulty TEXT,
+            reward INTEGER,
+            description TEXT,
+            deadline TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (quest_id) REFERENCES quests(id)
+        );
+        """)
+        cur.execute("""
+        CREATE TABLE IF NOT EXISTS locations (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            quest_id INTEGER NOT NULL,
+            kind TEXT NOT NULL,
+            payload TEXT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (quest_id) REFERENCES quests(id)
+        );
+        """)
+        self.conn.commit()
