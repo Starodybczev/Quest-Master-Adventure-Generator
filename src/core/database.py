@@ -72,3 +72,32 @@ class Database:
         self.conn.commit()
 
 
+    def create_quest(self, data):
+        """
+        data = {
+            "title": "...",
+            "difficulty": "...",
+            "reward": 100,
+            "description": "...",
+            "deadline": "..."
+        }
+        """
+        cur = self.conn.cursor()
+
+        cur.execute("""
+        INSERT INTO quests(title, difficulty, reward, description, deadline)
+        VALUES (?, ?, ?, ?, ?)
+        """, (
+            data["title"],
+            data["difficulty"],
+            data["reward"],
+            data["description"],
+            data["deadline"]
+        ))
+
+        quest_id = cur.lastrowid
+        self.conn.commit()
+
+        quest = self.get_quest(quest_id)
+        self.save_version(quest)
+        return quest
