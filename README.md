@@ -46,9 +46,9 @@ Demo
 
 Screenshots (relative paths to files in the `assets/` folder):
 
-![Screenshot 1](assets/demo1.png)
-![Screenshot 2](assets/demo2.png)
-![Screenshot 3](assets/demo3.png)
+![Screenshot 1](src/assets/demo1.png)
+![Screenshot 2](src/assets/demo2.png)
+![Screenshot 3](src/assets/demo3.png)
 
 
 Want to help or extend the project?
