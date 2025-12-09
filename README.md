@@ -50,9 +50,6 @@ Screenshots (relative paths to files in the `assets/` folder):
 ![Screenshot 2](assets/demo2.png)
 ![Screenshot 3](assets/demo3.png)
 
-Video demo:
-
-[Demo video link](https://github.com/user-attachments/assets/14dc714f-2f3e-4fd1-a0a9-339e77b43ba2)
 
 Want to help or extend the project?
 ----------------------------------
