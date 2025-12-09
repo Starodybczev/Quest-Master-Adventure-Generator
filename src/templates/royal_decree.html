@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @page {
+            size: A4;
+            margin: 2cm;
+        }
+        body {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            background: linear-gradient(to bottom, #f4e4bc 0%, #e8d4a8 100%);
+            padding: 30px;
+            color: #2c1810;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px double #8B4513;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .crown {
+            font-size: 48px;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        h1 {
+            font-size: 28px;
+            color: #8B0000;
+            margin: 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        .quest-info {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.3);
+            border: 2px solid #8B4513;
+            border-radius: 10px;
+        }
+        .info-row {
+            margin: 10px 0;
+            font-size: 14px;
+        }
+        .label {
+            font-weight: bold;
+            color: #8B0000;
+        }
+        .description {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.5);
+            border-left: 5px solid #FFD700;
+            line-height: 1.8;
+            text-align: justify;
+        }
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            border-top: 2px solid #8B4513;
+            padding-top: 20px;
+        }
+        .seal {
+            width: 120px;
+            height: 120px;
+            margin: 20px auto;
+            border: 5px double #8B0000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle, #FFD700 0%, #DAA520 100%);
+            font-size: 16px;
+            font-weight: bold;
+            color: #8B0000;
+        }
+        .qr-code {
+            margin: 20px auto;
+            text-align: center;
+        }
+        .qr-code img {
+            border: 3px solid #8B4513;
+            padding: 10px;
+            background: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="crown">👑</div>
+        <h1>Королевский указ</h1>
+        <p style="font-style: italic; color: #8B4513;">От имени Его Величества</p>
+    </div>
+
+    <div class="quest-info">
+        <div class="info-row">
+            <span class="label">Номер указа:</span> #{{ quest.id }}
+        </div>
+        <div class="info-row">
+            <span class="label">Название квеста:</span> {{ quest.title }}
+        </div>
+        <div class="info-row">
+            <span class="label">Степень важности:</span> {{ quest.difficulty }}
+        </div>
+        <div class="info-row">
+            <span class="label">Королевская награда:</span> {{ quest.reward }} золотых монет
+        </div>
+        <div class="info-row">
+            <span class="label">Срок исполнения:</span> до {{ quest.deadline }}
+        </div>
+    </div>
+
+    <div class="description">
+        <p><strong>Описание задания:</strong></p>
+        <p>{{ quest.description }}</p>
+    </div>
+
+    <div class="footer">
+        <div class="seal">
+            КОРОЛЕВСКАЯ<br>ПЕЧАТЬ
+        </div>
+        <p style="font-size: 12px; color: #8B4513;">
+            Документ выдан: {{ current_date }}
+        </p>
+
+        {% if qr_code_data %}
+        <div class="qr-code">
+            <p style="font-size: 11px; margin-bottom: 10px;">QR-код для проверки подлинности:</p>
+            <img src="{{ qr_code_data }}" alt="QR Code" width="100" height="100">
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
