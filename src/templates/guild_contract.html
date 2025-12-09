@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background: #f4e4bc;
+            padding: 40px;
+            color: #2c1810;
+        }
+        .contract {
+            border: 5px double #8B4513;
+            padding: 30px;
+            background: white;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            text-transform: uppercase;
+            border-bottom: 3px solid #8B4513;
+            padding-bottom: 15px;
+        }
+        .section {
+            margin: 20px 0;
+        }
+        .section-title {
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #8B0000;
+            margin-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        td {
+            padding: 10px;
+            border: 1px solid #8B4513;
+        }
+        .seal {
+            width: 100px;
+            height: 100px;
+            border: 5px solid #8B0000;
+            border-radius: 50%;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            background: linear-gradient(135deg, #DAA520 0%, #FFD700 100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="contract">
+        <h1>⚔️ Контракт Гильдии Приключенцев #{{ quest.id }}</h1>
+
+        <div class="section">
+            <div class="section-title">Раздел I: Идентификация квеста</div>
+            <table>
+                <tr>
+                    <td><strong>Название:</strong></td>
+                    <td>{{ quest.title }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Сложность:</strong></td>
+                    <td>{{ quest.difficulty }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Вознаграждение:</strong></td>
+                    <td>{{ quest.reward }} золотых</td>
+                </tr>
+                <tr>
+                    <td><strong>Дедлайн:</strong></td>
+                    <td>{{ quest.deadline }}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Раздел II: Описание задания</div>
+            <p style="text-align: justify; line-height: 1.8;">
+                {{ quest.description }}
+            </p>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Раздел III: Условия выполнения</div>
+            <p>
+                1. Приключенец обязуется выполнить задание в указанный срок.<br>
+                2. При успешном выполнении выплачивается полная награда.<br>
+                3. Гильдия не несет ответственности за травмы, полученные в ходе выполнения квеста.
+            </p>
+        </div>
+
+        <div style="margin-top: 40px; text-align: center;">
+            <div class="seal">ПЕЧАТЬ<br>ГИЛЬДИИ</div>
+            <p style="font-size: 12px; margin-top: 20px;">
+                Дата составления: {{ current_date }}
+            </p>
+        </div>
+    </div>
+</body>
+</html>
