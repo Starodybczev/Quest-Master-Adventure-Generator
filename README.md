@@ -1,5 +1,11 @@
 # Quest Master — Generator of Adventures
 
+
+<p>
+    <img src="https://img.shields.io/badge/Python-3.11-3776AB?style=flat&logo=python&logoColor=white" alt="Python Badge" />
+    <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white" alt="HTML5 Badge" />
+</p>
+
 A compact Python app to create, edit and export fantasy quests. It includes a
 small GUI (PyQt6), a lightweight SQLite-backed data layer, a simple
 gamification engine, and tools to export quests to PDF/DOCX.
